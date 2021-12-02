@@ -20,39 +20,23 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public String helloMessage(){
+    public String helloMessage() {
         return "Страница работы с сотрудниками";
     }
 
     @GetMapping("/add")
-    public String addEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName){
-        Employee employee = employeeService.addEmployee(firstName, lastName);
-        if (employee == null) {
-            throw new EmployeeArrayIsFullException();
-        } else {
-            return "Сотрудник: " + employee.toString() + " успешно создан";
-        }
+    public String addEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+        return "Сотрудник: " + employeeService.addEmployee(firstName, lastName) + " успешно создан";
     }
 
     @GetMapping("/remove")
-    public String deleteEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName){
-
-        Employee employee = employeeService.deleteEmployee(firstName, lastName);
-        if (employee == null) {
-            throw new EmployeeNotFoundException();
-        } else {
-            return "Сотрудник: " + employee.toString() + " успешно удален";
-        }
+    public String deleteEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+        return "Сотрудник: " + employeeService.deleteEmployee(firstName, lastName) + " успешно удален";
     }
 
     @GetMapping("/find")
-    public Employee findEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName){
-        Employee employee = employeeService.findEmployee(firstName, lastName);
-        if (employee == null) {
-            throw new EmployeeNotFoundException();
-        } else {
-            return employee;
-        }
+    public Employee findEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+        return employeeService.findEmployee(firstName, lastName);
     }
 
 }

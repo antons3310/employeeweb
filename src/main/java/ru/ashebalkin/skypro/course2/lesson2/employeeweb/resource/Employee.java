@@ -35,13 +35,4 @@ public class Employee {
         return Objects.hash(getFirstName(), getLastName());
     }
 
-
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (!(o instanceof Employee)) return false;
-//        Employee employee = (Employee) o;
-//        return getFirstName().equals(employee.getFirstName()) && getLastName().equals(employee.getLastName());
-//    }
-
 }
