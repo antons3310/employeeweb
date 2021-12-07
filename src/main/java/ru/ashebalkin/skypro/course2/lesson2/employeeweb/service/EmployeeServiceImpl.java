@@ -11,11 +11,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     Employee[] employees = new Employee[5];
 
     @Override
-    public String addEmployee(String firstName, String lastName) {
+    public Employee addEmployee(String firstName, String lastName) {
         Employee newEmployee = new Employee(firstName, lastName);
         boolean isAdd = false;
 
-        for (int i = 0; i < employees.length; i = i + 1) {
+        for (int i = 0; i < employees.length; i++) {
             if (employees[i] == null) {
                 employees[i] = newEmployee;
                 isAdd = true;
@@ -24,7 +24,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
         if (isAdd) {
-            return newEmployee.toString();
+            return newEmployee;
         } else {
             throw new EmployeeArrayIsFullException();
         }
@@ -33,7 +33,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public String deleteEmployee(String firstName, String lastName) {
         Employee e = null;
-        for (int i = 0; i < employees.length; i = i + 1) {
+        for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null) {
                 if (employees[i].equals(firstName, lastName)) {
                     e = employees[i];
