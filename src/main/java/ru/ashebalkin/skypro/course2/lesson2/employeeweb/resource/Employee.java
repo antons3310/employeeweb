@@ -3,9 +3,8 @@ package ru.ashebalkin.skypro.course2.lesson2.employeeweb.resource;
 import java.util.Objects;
 
 public class Employee {
-    private final String firstName;                 //Имя
-    private final String lastName;                  //Фамилия
-
+    private final String firstName;         //Имя
+    private final String lastName;          //Фамилия
 
     public Employee(String firstName, String lastName) {
         this.firstName = firstName;

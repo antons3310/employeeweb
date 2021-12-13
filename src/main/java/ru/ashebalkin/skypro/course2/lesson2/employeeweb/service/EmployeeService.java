@@ -2,7 +2,7 @@ package ru.ashebalkin.skypro.course2.lesson2.employeeweb.service;
 
 import ru.ashebalkin.skypro.course2.lesson2.employeeweb.resource.Employee;
 
-import java.util.List;
+import java.util.Collection;
 
 public interface EmployeeService {
     Employee addEmployee(String firstName, String lastName);
@@ -11,5 +11,5 @@ public interface EmployeeService {
 
     Employee findEmployeeByFIO(String firstName, String lastName);
 
-    List<Employee> getEmployeeList();
+    Collection<Employee> getEmployeeList();
 }
