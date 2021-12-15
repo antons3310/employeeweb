@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.ashebalkin.skypro.course2.lesson2.employeeweb.resource.Employee;
 import ru.ashebalkin.skypro.course2.lesson2.employeeweb.service.EmployeeService;
 
-import java.util.List;
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/employee")
@@ -40,7 +40,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/get-list")
-    public List<Employee> getEmployeeList(){
+    public Collection<Employee> getEmployeeList() {
         return employeeService.getEmployeeList();
     }
 
