@@ -16,13 +16,24 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     public EmployeeServiceImpl() {
         employeeBook = new HashMap<>();
+
+        employeeBook.put("Шебалкин" + "Антон", new Employee("Шебалкин", "Антон", 1, 25874.75));
+        employeeBook.put("Петрова" + "Алина", new Employee("Петрова", "Алина", 1, 57412.49));
+        employeeBook.put("Епифанов" + "Светлана", new Employee("Епифанов", "Светлана", 2, 85221.17));
+        employeeBook.put("Михайлова" + "Татьяна", new Employee("Михайлова", "Татьяна", 2, 17458.50));
+        employeeBook.put("Михайлова" + "Ольга", new Employee("Михайлова", "Ольга", 3, 36000.00));
+        employeeBook.put("Павлов" + "Алексей", new Employee("Павлов", "Алексей", 3, 48756.88));
+        employeeBook.put("Новиков" + "Андрей", new Employee("Новиков", "Андрей", 4, 54898.44));
+        employeeBook.put("Дядюра" + "Дмитрий", new Employee("Дядюра", "Дмитрий", 4, 478844.72));
+        employeeBook.put("Ломака" + "Сергей", new Employee("Ломака", "Сергей", 5, 58114.13));
+        employeeBook.put("Грошев" + "Алексей", new Employee("Грошев", "Алексей", 5, 87444.55));
     }
 
     @Override
-    public Employee addEmployee(String firstName, String lastName) {
+    public Employee addEmployee(String firstName, String lastName, int departmentId, double salaryAmount) {
 
         if (!employeeBook.containsKey(firstName + lastName)) {
-            Employee newEmployee = new Employee(firstName, lastName);
+            Employee newEmployee = new Employee(firstName, lastName, departmentId, salaryAmount);
             employeeBook.put(firstName + lastName, newEmployee);
             return newEmployee;
         } else {
