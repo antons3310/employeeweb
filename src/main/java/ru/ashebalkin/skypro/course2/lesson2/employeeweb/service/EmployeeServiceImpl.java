@@ -14,7 +14,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private final Map<String, Employee> employeeBook;
 
-    public EmployeeServiceImpl() {
+    private final EmployeeCheckInputDataService employeeCheckInputDataService;
+
+    public EmployeeServiceImpl(EmployeeCheckInputDataService employeeCheckInputDataService) {
+        this.employeeCheckInputDataService = employeeCheckInputDataService;
         employeeBook = new HashMap<>();
 
         employeeBook.put("Шебалкин" + "Антон", new Employee("Шебалкин", "Антон", 1, 25874.75));
@@ -32,6 +35,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee addEmployee(String firstName, String lastName, int departmentId, double salaryAmount) {
 
+        employeeCheckInputDataService.checkTextData(firstName);
+        employeeCheckInputDataService.checkTextData(lastName);
+        firstName = employeeCheckInputDataService.checkCapitalLetters(firstName);
+        lastName = employeeCheckInputDataService.checkCapitalLetters(lastName);
+
         if (!employeeBook.containsKey(firstName + lastName)) {
             Employee newEmployee = new Employee(firstName, lastName, departmentId, salaryAmount);
             employeeBook.put(firstName + lastName, newEmployee);
@@ -42,7 +50,30 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public Employee addEmployee(String firstName, String lastName) {
+
+        employeeCheckInputDataService.checkTextData(firstName);
+        employeeCheckInputDataService.checkTextData(lastName);
+        firstName = employeeCheckInputDataService.checkCapitalLetters(firstName);
+        lastName = employeeCheckInputDataService.checkCapitalLetters(lastName);
+
+
+        if (!employeeBook.containsKey(firstName + lastName)) {
+            Employee newEmployee = new Employee(firstName, lastName);
+            employeeBook.put(firstName + lastName, newEmployee);
+            return newEmployee;
+        } else {
+            throw new EmployeeAlreadyExistsException();
+        }
+    }
+
+    @Override
     public Employee deleteEmployee(String firstName, String lastName) {
+
+        employeeCheckInputDataService.checkTextData(firstName);
+        employeeCheckInputDataService.checkTextData(lastName);
+        firstName = employeeCheckInputDataService.checkCapitalLetters(firstName);
+        lastName = employeeCheckInputDataService.checkCapitalLetters(lastName);
 
         if (employeeBook.containsKey(firstName + lastName)) {
             return employeeBook.remove(firstName + lastName);
@@ -53,6 +84,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee findEmployeeByFIO(String firstName, String lastName) {
+
+        employeeCheckInputDataService.checkTextData(firstName);
+        employeeCheckInputDataService.checkTextData(lastName);
+        firstName = employeeCheckInputDataService.checkCapitalLetters(firstName);
+        lastName = employeeCheckInputDataService.checkCapitalLetters(lastName);
 
         if (employeeBook.containsKey(firstName + lastName)) {
             return employeeBook.get(firstName + lastName);

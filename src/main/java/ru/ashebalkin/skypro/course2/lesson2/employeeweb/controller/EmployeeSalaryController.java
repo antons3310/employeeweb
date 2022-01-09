@@ -26,17 +26,17 @@ public class EmployeeSalaryController {
     }
 
     @GetMapping("/max-salary")
-    public String getMaxSalaryByDepartment(@RequestParam("departmentId") Integer deparmentId) {
+    public String getMaxSalaryByDepartment(@RequestParam("departmentId") int deparmentId) {
         return "Максимальная зарплата сотрудника отдела с ИД: " + deparmentId + " = " + employeeSalaryService.getMaxSalaryByDepartment(deparmentId);
     }
 
     @GetMapping("/min-salary")
-    public String getMinSalaryByDepartment(@RequestParam("departmentId") Integer deparmentId) {
+    public String getMinSalaryByDepartment(@RequestParam("departmentId") int deparmentId) {
         return "Минимальная зарплата сотрудника отдела с ИД: " + deparmentId + " = " + employeeSalaryService.getMinSalaryByDepartment(deparmentId);
     }
 
     @GetMapping(value = "/all", params = {"departmentId"})
-    public Collection<Employee> getEmployeeListByDepartment(@RequestParam(value = "departmentId", required = false) Integer deparmentId) {
+    public Collection<Employee> getEmployeeListByDepartment(@RequestParam(value = "departmentId", required = false) int deparmentId) {
         return employeeSalaryService.getEmployeeListByDepartment(deparmentId);
     }
 

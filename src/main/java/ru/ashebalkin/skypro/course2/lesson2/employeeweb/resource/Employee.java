@@ -5,8 +5,12 @@ import java.util.Objects;
 public class Employee {
     private final String firstName;         //Имя
     private final String lastName;          //Фамилия
-    private Integer departmentId;           //ИД Подразделения
+    private int departmentId;           //ИД Подразделения
     private double salaryAmount;            //Размер зарплаты сотрудника
+
+    public Employee(String firstName, String lastName) {
+        this(firstName, lastName, 0, 0);
+    }
 
     public Employee(String firstName, String lastName, Integer departmentId, double salaryAmount) {
         this.firstName = firstName;
@@ -15,7 +19,7 @@ public class Employee {
         this.salaryAmount = salaryAmount;
     }
 
-    public Integer getDepartmentId() {
+    public int getDepartmentId() {
         return departmentId;
     }
 
@@ -27,7 +31,7 @@ public class Employee {
         return firstName;
     }
 
-    public void setDepartmentId(Integer departmentId) {
+    public void setDepartmentId(int departmentId) {
         this.departmentId = departmentId;
     }
 
