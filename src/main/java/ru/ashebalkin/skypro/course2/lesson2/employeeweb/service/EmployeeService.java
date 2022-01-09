@@ -5,7 +5,7 @@ import ru.ashebalkin.skypro.course2.lesson2.employeeweb.resource.Employee;
 import java.util.Collection;
 
 public interface EmployeeService {
-    Employee addEmployee(String firstName, String lastName);
+    Employee addEmployee(String firstName, String lastName, int departmentId, double salaryAmount);
 
     Employee deleteEmployee(String firstName, String lastName);
 

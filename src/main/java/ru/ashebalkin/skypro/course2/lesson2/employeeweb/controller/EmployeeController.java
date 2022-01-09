@@ -25,17 +25,22 @@ public class EmployeeController {
     }
 
     @GetMapping("/add")
-    public String addEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
-        return "Сотрудник: " + employeeService.addEmployee(firstName, lastName) + " успешно создан";
+    public String addEmployee(@RequestParam("firstName") String firstName,
+                              @RequestParam("lastName") String lastName,
+                              @RequestParam("depId") int departmentId,
+                              @RequestParam("sal") double salaryAmount) {
+        return "Сотрудник: " + employeeService.addEmployee(firstName, lastName, departmentId, salaryAmount) + " успешно создан";
     }
 
     @GetMapping("/remove")
-    public String deleteEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+    public String deleteEmployee(@RequestParam("firstName") String firstName,
+                                 @RequestParam("lastName") String lastName) {
         return "Сотрудник: " + employeeService.deleteEmployee(firstName, lastName) + " успешно удален";
     }
 
     @GetMapping("/find")
-    public Employee findEmployeeByFIO(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+    public Employee findEmployeeByFIO(@RequestParam("firstName") String firstName,
+                                      @RequestParam("lastName") String lastName) {
         return employeeService.findEmployeeByFIO(firstName, lastName);
     }
 
