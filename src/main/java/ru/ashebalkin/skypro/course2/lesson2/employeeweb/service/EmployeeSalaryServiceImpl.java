@@ -1,11 +1,12 @@
 package ru.ashebalkin.skypro.course2.lesson2.employeeweb.service;
 
 import org.springframework.stereotype.Service;
+import ru.ashebalkin.skypro.course2.lesson2.employeeweb.exception.EmployeeNotFoundException;
 import ru.ashebalkin.skypro.course2.lesson2.employeeweb.resource.Employee;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -13,38 +14,36 @@ import java.util.stream.Collectors;
 public class EmployeeSalaryServiceImpl implements EmployeeSalaryService {
     private final EmployeeService employeeService;
 
-    private final HashMap<Integer, Collection<Employee>> workBook;
-    private final HashSet<Integer> deparmentList;
-
-
     public EmployeeSalaryServiceImpl(EmployeeService employeeService) {
         this.employeeService = employeeService;
-        workBook = new HashMap<>();
-        deparmentList = new HashSet<>();
     }
 
     @Override
     public Double getMaxSalaryByDepartment(Integer deparmentId) {
+
         Collection<Employee> employees = employeeService.getEmployeeList();
-//        Employee fndE = employees.stream().
-//                filter(employee -> employee.getDepartmentId() == deparmentId).
-//                max(Comparator.comparingDouble(employee -> employee.getSalaryAmount())).
-//                get();
-//        return fndE.getSalaryAmount();
-        return employees.stream().
+
+        Employee fndE = employees.stream().
                 filter(employee -> employee.getDepartmentId() == deparmentId).
-                mapToDouble(Employee::getSalaryAmount).
-                max().
-                getAsDouble();
+                max(Comparator.comparingDouble(Employee::getSalaryAmount)).
+                orElseThrow(() -> new EmployeeNotFoundException("Сотрудник для отдела: " + deparmentId + " не найден"));
+
+        return fndE.getSalaryAmount();
 
     }
 
     @Override
     public Double getMinSalaryByDepartment(Integer deparmentId) {
+
         Collection<Employee> employees = employeeService.getEmployeeList();
-        return employees.stream().
-                filter(employee -> Objects.equals(employee.getDepartmentId(), deparmentId)).
-                mapToDouble(Employee::getSalaryAmount).min().getAsDouble();
+
+        Employee fndE = employees.stream().
+                filter(employee -> employee.getDepartmentId() == deparmentId).
+                min(Comparator.comparingDouble(Employee::getSalaryAmount)).
+                orElseThrow(() -> new EmployeeNotFoundException("Сотрудник для отдела: " + deparmentId + " не найден"));
+
+        return fndE.getSalaryAmount();
+
     }
 
     @Override
@@ -57,6 +56,9 @@ public class EmployeeSalaryServiceImpl implements EmployeeSalaryService {
 
     @Override
     public HashMap<Integer, Collection<Employee>> getEmployeeListByDepartment() {
+
+        HashMap<Integer, Collection<Employee>> workBook = new HashMap<>();
+
         Collection<Employee> employees = employeeService.getEmployeeList();
         employees.forEach(employee -> workBook.put(employee.getDepartmentId(), getEmployeeListByDepartment(employee.getDepartmentId())));
         return workBook;

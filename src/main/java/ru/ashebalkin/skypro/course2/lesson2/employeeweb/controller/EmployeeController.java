@@ -26,9 +26,15 @@ public class EmployeeController {
 
     @GetMapping("/add")
     public String addEmployee(@RequestParam("firstName") String firstName,
+                              @RequestParam("lastName") String lastName) {
+        return "Сотрудник: " + employeeService.addEmployee(firstName, lastName) + " успешно создан";
+    }
+
+    @GetMapping(value = "/add", params = {"depId, sal"})
+    public String addEmployee(@RequestParam("firstName") String firstName,
                               @RequestParam("lastName") String lastName,
-                              @RequestParam("depId") int departmentId,
-                              @RequestParam("sal") double salaryAmount) {
+                              @RequestParam(value = "depId", required = false) int departmentId,
+                              @RequestParam(value = "sal", required = false) double salaryAmount) {
         return "Сотрудник: " + employeeService.addEmployee(firstName, lastName, departmentId, salaryAmount) + " успешно создан";
     }
 
